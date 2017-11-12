@@ -130,6 +130,6 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
-nnoremap j jzz
-nnoremap k kzz
+"nnoremap j jzz
+"nnoremap k kzz
 nnoremap G Gzz
