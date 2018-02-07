@@ -37,7 +37,7 @@ let g:SimpylFold_docstring_preview=1
 
 "Auto Indentation
 filetype indent on
-set textwidth=79
+set textwidth=82
 set fileformat=unix
 set shiftwidth=4
 set expandtab
@@ -61,23 +61,28 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "type": "style" }
 
 
-"Color Schemes
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-if has('gui_running')
-    set background=dark
-    colorscheme solarized
-else
-    colorscheme zenburn
-endif
+""Color Schemes
+"Plugin 'jnurmine/Zenburn'
+"Plugin 'altercation/vim-colors-solarized'
+"if has('gui_running')
+"    set background=dark
+"    colorscheme solarized
+"else
+"    colorscheme zenburn
+"endif
 
 "File Browsing
 Plugin 'scrooloose/nerdtree'
 "Using tabs
 Plugin 'jistr/vim-nerdtree-tabs'
-let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
+"close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"open NERDTree with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
 
 "Line Numbering
 set nu
@@ -94,7 +99,7 @@ endif
 set list
 
 "System Clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -112,9 +117,10 @@ inoremap {<CR>  {<CR>}<Esc>O
 "inoremap <expr> "  strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
 "Run script
-autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
+autocmd filetype python3 nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
 autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype pdflatex nnoremap <F4> :w <bar> exec '!tex '.shellescape('%')<CR>
 
 set number relativenumber
 
