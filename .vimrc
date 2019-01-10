@@ -10,8 +10,13 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+" Write numbers in the ascending order inside a visual block
+Plugin 'triglac/vim-visual-increment'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+
+" Write numbers in the ascending order inside a visual block
+Plugin 'triglav/vim-visual-increment'
 
 
 " All of your Plugins must be added before the following line
@@ -37,7 +42,10 @@ let g:SimpylFold_docstring_preview=1
 
 "Auto Indentation
 filetype indent on
-set textwidth=82
+set wrap linebreak nolist
+set fo+=l
+au BufRead,BufNewFile *.tex setlocal textwidth=80
+set wrapmargin=0
 set fileformat=unix
 set shiftwidth=4
 set expandtab
@@ -64,15 +72,15 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = { "type": "style" }
 
 
-""Color Schemes
-"Plugin 'jnurmine/Zenburn'
-"Plugin 'altercation/vim-colors-solarized'
-"if has('gui_running')
-"    set background=dark
-"    colorscheme solarized
-"else
-"    colorscheme zenburn
-"endif
+"Color Schemes
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+if has('gui_running')
+    set background=dark
+    colorscheme solarized
+else
+    colorscheme zenburn
+endif
 
 "File Browsing
 Plugin 'scrooloose/nerdtree'
@@ -99,7 +107,7 @@ endif
 set list
 
 "System Clipboard
-set clipboard=unnamedplus
+set clipboard=unnamedplus,autoselect
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
@@ -115,12 +123,6 @@ inoremap {<CR>  {<CR>}<Esc>O
 "inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 "inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 "inoremap <expr> "  strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-
-"Run script
-autocmd filetype python3 nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
-autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd filetype pdflatex nnoremap <F4> :w <bar> exec '!tex '.shellescape('%')<CR>
 
 set number relativenumber
 
@@ -139,3 +141,7 @@ nnoremap g# g#zz
 "nnoremap j jzz
 "nnoremap k kzz
 nnoremap G Gzz
+command W w
+command Q q
+command Wq wq
+command WQ wq
