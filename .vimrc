@@ -10,8 +10,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-" Write numbers in the ascending order inside a visual block
-Plugin 'triglac/vim-visual-increment'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
@@ -70,7 +68,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = { "type": "style" }
-
+let g:syntastic_quiet_messages = { "regex": [
+            \ '\mpossible unwanted space at "{"',
+            \ ]}
 
 "Color Schemes
 Plugin 'jnurmine/Zenburn'
